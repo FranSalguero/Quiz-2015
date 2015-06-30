@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 });
 
 //rutas nuevas para preguntas y respuestas
-router.get('quizes/question', quizController.question);
-router.get('quizes/answer', quizController.answer);
+router.get('/quizes/question', quizController.question);
+router.get('/quizes/answer', quizController.answer);
 
 module.exports = router;
