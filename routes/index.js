@@ -15,7 +15,8 @@ router.get('/', function(req, res) {
 
 // Autoload de comandos con :quizId
 router.param('quizId', quizController.load);  // autoload :quizId
-
+//Autoload de los comentarios
+router.param('commentId', commentController.load);  // autoload :commentId
 // Definición de rutas de sesión
 router.get('/login',  sessionController.new);     // formulario login
 router.post('/login', sessionController.create);  // crear sesión
@@ -33,6 +34,11 @@ router.delete('/quizes/:quizId(\\d+)',     sessionController.loginRequired, quiz
 //rutas de comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new',            commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',              commentController.create);
+//El comentario estará accesible cuando la acción publish se ejecute:
+//GET funciona, pero el interfaz uniforme indica usar PUT en este caso
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', 
+	                                    sessionController.loginRequired, commentController.publish);
+
 
 //GET /author
 router.get('/author', function(req, res) {
