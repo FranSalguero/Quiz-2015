@@ -31,6 +31,21 @@ app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Control de timeout de sesión
+app.use(function(req, res, next) {
+  //si hay una sesión iniciada, verificamos que no se ha cumplido el timeout de sesión (120s)
+  if (req.session.user){
+    var timestampActual = new Date();
+    console.log("timestampActual: " + timestampActual.valueOf());
+    console.log("timestampLogin: " + req.session.user.tiempo);
+    console.log("diferencia:" + (req.session.user.tiempo-timestampActual.valueOf()));
+    if (timestampActual.valueOf()>req.session.user.tiempo){
+      delete req.session.user;
+    }
+  }
+  next();
+});
+
 // Helpers dinamicos:
 app.use(function(req, res, next) {
 

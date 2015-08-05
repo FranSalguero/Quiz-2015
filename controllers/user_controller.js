@@ -2,7 +2,7 @@
 //y formularios de alta, baja para el usuario admin
 
 var users = { admin: {id:1, username:"admin", password:"1234"},
-              pepe:  {id:2, username:"fran",  password:"5678"}
+              fran:  {id:2, username:"fran",  password:"5678"}
             };
 
 // Comprueba si el usuario esta registrado en users
