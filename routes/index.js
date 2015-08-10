@@ -7,16 +7,19 @@ var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 //y ahora el de sesiones
 var sessionController = require('../controllers/session_controller');
+//añadimos el controlador de estadísticas
+var statisticsController = require('../controllers/statistics_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Quiz', errors: [] });
+    res.render('index', { title: 'Quiz', errors: [] });
 });
 
 // Autoload de comandos con :quizId. Si hay un quizId, cargamos la pregunta
 router.param('quizId', quizController.load);  // autoload :quizId
 //Autoload de los comentarios. Si hay un commentId, cargamos el comentario
 router.param('commentId', commentController.load);  // autoload :commentId
+
 // Definición de rutas de sesión
 router.get('/login',  sessionController.new);     // formulario login
 router.post('/login', sessionController.create);  // crear sesión
@@ -39,9 +42,12 @@ router.post('/quizes/:quizId(\\d+)/comments',              commentController.cre
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish',
 	                                    sessionController.loginRequired, commentController.publish);
 
+//GET /quizes/statistics
+router.get('/quizes/statistics',          statisticsController.show);
 
 //GET /author
 router.get('/author', function(req, res) {
   res.render('author', {errors: []});
 });
+
 module.exports = router;

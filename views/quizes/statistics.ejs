@@ -1,0 +1,12 @@
+<p><strong>Estadísticas:</strong></p>
+<p> Número de preguntas: <%= estadisticas.preguntas %> </p>
+<p> Número de comentarios: <%= estadisticas.comentariosTotales %> </p>
+<p> Número medio de comentarios por pregunta:
+<%if (estadisticas.comentariosTotales!=0) { %>
+<%= estadisticas.comentariosTotales/estadisticas.preguntas %>
+<%}else{            %>
+<%=    "No hay comentarios" %>
+<%}             %>
+</p>
+<p>Número de preguntas sin comentario: <%= estadisticas.preguntasSinComentarios %></p>
+<p>Número de preguntas con comentarios: <%= estadisticas.preguntas-estadisticas.preguntasSinComentarios %></p>
